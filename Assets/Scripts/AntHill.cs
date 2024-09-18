@@ -35,7 +35,7 @@ public class AntHill : MonoBehaviour
     {
         timer += Time.deltaTime;
         seconds = (int)timer;
-        Debug.Log(seconds);
+
     }
     private void SpawnCheck()
     {
@@ -52,6 +52,8 @@ public class AntHill : MonoBehaviour
     private void Spawn()
     {
         GameObject workerAnt = Instantiate(ant);
+        WorkerAntSearch worker = workerAnt.GetComponent<WorkerAntSearch>();
+        worker.antHill = this.transform;
         antsSpawned.Add(workerAnt);
     }
 }
