@@ -39,7 +39,7 @@ public class AntHill : MonoBehaviour
     }
     private void SpawnCheck()
     {
-        if (seconds >= 30 )
+        if (seconds >= 3 )
         {
             timer = 0f;
             int rng = Random.Range(1, 10);
