@@ -5,7 +5,7 @@ using UnityEngine;
 public class MediumFood : Food
 {
     // Start is called before the first frame update
-    void Awake()
+    void Awake() //Sets Med Food Health
     {
         foodHealth = 25;
     }

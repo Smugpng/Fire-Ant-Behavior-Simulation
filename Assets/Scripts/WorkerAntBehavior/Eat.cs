@@ -1,40 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Eat : MonoBehaviour
 {
     [Header("Stomach Amounts")]
-    [SerializeField]
-    private float maxSolidFood, maxLiquidFood;
-    [SerializeField]
-    private float currSolidFood = 0, currLiquidFood = 0;
-    private bool wantToCarry, wantToDrink;
+    private AntStats antStats;
 
     private bool canEat;
-    WorkerAntSearch WAS;
+    public WorkerBehavior WAS;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        WAS = GetComponentInParent<WorkerAntSearch>();
-        maxSolidFood = Random.Range(1, 5); maxLiquidFood = Random.Range(1, 5);
-        if (maxLiquidFood >= maxSolidFood)
-        {
-            wantToDrink = true;
-            wantToCarry = false;
-        }
-        else
-        {
-            wantToDrink = false;
-            wantToCarry = true;
-        }
+        antStats = GetComponentInParent<AntStats>();
+        
     }
 
     // Update is called once per frame
     void Update()
-    {
-        if( currLiquidFood >= maxLiquidFood || currSolidFood >= maxSolidFood)
+    {   
+        if (antStats.isFull)
         {
+            
+            canEat = true;
             WAS.IsFull();
         }
     }
@@ -44,26 +35,28 @@ public class Eat : MonoBehaviour
         {
             canEat = true;
             Food foodToEat = other.GetComponent<Food>();
-            if (wantToCarry )
+            if (antStats.needSolids)
             {
                 Bite(foodToEat);
             }
-            else if (wantToDrink)
+            else
             {
                 Drink(foodToEat);
             }
         }
     }
+    //These functions updates the current amount of the type of foods they have
+    #region Eating/Drinking 
     private void Drink(Food other)
     {
         other.LoseLiquid();
-        currLiquidFood++;
+        antStats.Drink(1);
         Invoke("ResetEat", 2);
     }
     private void Bite(Food other)
     {
         other.LoseSolid();
-        currSolidFood++;
+        antStats.Eat(1);
         Invoke("ResetEat", 2);
     }
 
@@ -71,4 +64,6 @@ public class Eat : MonoBehaviour
     {
         canEat = false;
     }
+    #endregion 
+
 }

@@ -4,7 +4,7 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class WorkerAntSearch : MonoBehaviour
+public class WorkerBehavior : MonoBehaviour
 {
 
     [Header("Ants")]
@@ -12,41 +12,49 @@ public class WorkerAntSearch : MonoBehaviour
     private NavMeshAgent antAgent;
     [SerializeField]
     private LayerMask antLayer;
+    
 
     [Header("Smell")]
     [SerializeField]
-    private float range;
+    private float range = 20;
     [SerializeField]
-    private float maxRange;
+    private float maxRange = 50;
     
-
 
     [Header("Food")]
     [SerializeField]
     private LayerMask foodLayer;
     [SerializeField] private bool foundFood;
     public GameObject foodToEat;
+    public bool inBase = false, isFull = false;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        antLayer = 1<<7;
+        foodLayer = 1<<6;
         antAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() //Updates bools
     {
         Search();
         if(foodToEat == null && foundFood)
         {
             foundFood = false;
         }
+        if (inBase && isFull)
+        {
+            isFull = false;
+            Search();
+        }
     }
     private void Search()
     {
-        if (antAgent.remainingDistance <= antAgent.stoppingDistance && !foundFood) //If the ant is close enough to their stopping point they try looking again
+        if (antAgent.remainingDistance <= antAgent.stoppingDistance && !foundFood && !isFull) //If the ant is close enough to their stopping point they try looking again
         {
             Vector3 point;
             RaycastHit hit;
@@ -65,7 +73,7 @@ public class WorkerAntSearch : MonoBehaviour
         }
     }
 
-    bool RandomSearch(Vector3 antHill, float range, out Vector3 point)
+    bool RandomSearch(Vector3 antHill, float range, out Vector3 point) //If they cant find any food find a random pos within the min and max ranges
     {
         Vector3 rndPos = antHill  + Random.insideUnitSphere * range;
         NavMeshHit hit;
@@ -78,27 +86,31 @@ public class WorkerAntSearch : MonoBehaviour
         return false;
     }
 
-    private void TellOthers(Vector3 point,GameObject food)
+    private void TellOthers(Vector3 point,GameObject food) //If the ant finds food they tell all the other ants around them so they can all eat it
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position,range,transform.forward,maxRange,antLayer);
         if(hits.Length > 0)
         {
             foreach (RaycastHit hit in hits)
             {
-                WorkerAntSearch foundAnts = hit.collider.gameObject.GetComponent<WorkerAntSearch>();
+                WorkerBehavior foundAnts = hit.collider.gameObject.GetComponent<WorkerBehavior>();
                 foundAnts.FoundFood(point);
                 foundAnts.foodToEat = food;
             }
         }
     }
-    public void FoundFood(Vector3 location)
+    public void FoundFood(Vector3 location) //Updated bool to make sure they dont keep searching while the find food
     {
-        if(!foundFood)
-        antAgent.SetDestination(location);
-        foundFood = true;
+        if (!foundFood && !isFull)
+        {
+            antAgent.SetDestination(location);
+            foundFood = true;
+        }
+        
     }
     public void IsFull()
     {
+        isFull = true;
         antAgent.SetDestination(antHill.position);
     }
 }

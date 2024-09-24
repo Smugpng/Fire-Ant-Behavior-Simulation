@@ -836,13 +836,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: AntHill
       objectReference: {fileID: 0}
+    - target: {fileID: 1048110420170714162, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099259517108312478, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+      propertyPath: ant
+      value: 
+      objectReference: {fileID: 960953455404588642, guid: fa124361f93101c4c95b5825c25a1b24, type: 3}
     - target: {fileID: 3099259517108312478, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
       propertyPath: spawnChance
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7062020151037846987, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7062020151037846987, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9124346588479850318, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
       propertyPath: m_LocalPosition.x
@@ -884,8 +896,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7062020151037846987, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

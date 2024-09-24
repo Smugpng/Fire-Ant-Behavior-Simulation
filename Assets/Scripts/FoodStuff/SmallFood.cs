@@ -6,7 +6,7 @@ public class SmallFood : Food
 {
     
     // Start is called before the first frame update
-    void Awake()
+    void Awake() //Sets Small Food health
     {
         foodHealth = 10;
     }
