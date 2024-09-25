@@ -8,7 +8,8 @@ public class Eat : MonoBehaviour
     [Header("Stomach Amounts")]
     private AntStats antStats;
 
-    private bool canEat;
+    [SerializeField]
+    private bool canEat = false;
     public WorkerBehavior WAS;
 
 
@@ -24,15 +25,26 @@ public class Eat : MonoBehaviour
     {   
         if (antStats.isFull)
         {
-            
             canEat = true;
             WAS.IsFull();
+        }
+        else
+        {
+            canEat = false ;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Food" && !canEat)
+        { 
+            canEat = false;
         }
     }
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Food" && !canEat)
         {
+            Debug.Log("IN range");
             canEat = true;
             Food foodToEat = other.GetComponent<Food>();
             if (antStats.needSolids)

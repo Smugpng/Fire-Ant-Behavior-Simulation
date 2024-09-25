@@ -56,8 +56,10 @@ public class AntStats : MonoBehaviour //This script stores and updates the basic
     {
         currSolids += eatAmt;
     }
-    public void ResetFood()
+    public void ResetFood(AntHill hill)
     {
+        hill.storedFood += currSolids;
+        hill.storedLiquid += currLiquid/2;
         currSolids = 0;
         currLiquid = 0;
     }

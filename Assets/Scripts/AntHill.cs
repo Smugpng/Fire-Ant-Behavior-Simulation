@@ -10,7 +10,7 @@ public class AntHill : MonoBehaviour
     private GameObject ant, queen;
     private float timer = 0f;
     private int seconds = 0;
-    private float storedFood;
+    public float storedFood, storedLiquid;
 
     [SerializeField]
     [Header("Number 1-10")]
@@ -57,10 +57,6 @@ public class AntHill : MonoBehaviour
         LB.myAnHill = this.transform;
         antsSpawned.Add(larvea);
     }
-    public void AddFood()
-    {
-        storedFood += 1;    
-    }
 
     private void OnTriggerEnter(Collider other) //When ants come back with full stomachs and food they can drop off at the hill, this checks to make sure it is a fully grown ant that has food to spare
     {
@@ -70,8 +66,7 @@ public class AntHill : MonoBehaviour
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = true;
             AntStats AS = other.GetComponent<AntStats>();
-            AS.ResetFood();
-            AddFood();
+            AS.ResetFood(this);
         }
     }
     private void OnTriggerExit(Collider other)

@@ -17,7 +17,7 @@ public class LarveaBehavior : MonoBehaviour
 
     void GrowUp() //Just adds the worker behavior and sets some variables
     {
-        stats.SetValues(10, 1, 10);
+        stats.SetValues(10, Random.Range(1,5), Random.Range(5,10));
         this.transform.localScale = new Vector3(.1f, .1f, .1f);
         WorkerBehavior worker = gameObject.AddComponent<WorkerBehavior>();
         worker.antHill = myAnHill;

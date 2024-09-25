@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4037700165394455850}
   - component: {fileID: 7841463573044329761}
   - component: {fileID: 1790520104928545968}
-  - component: {fileID: 5314321056860885619}
+  - component: {fileID: -8666895561246315845}
   m_Layer: 7
   m_Name: AntSmall
   m_TagString: Untagged
@@ -160,7 +160,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5314321056860885619
+--- !u!114 &-8666895561246315845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,6 +175,10 @@ MonoBehaviour:
   hp: 0
   solidNeeds: 0
   liquidNeeds: 0
+  currSolids: 0
+  currLiquid: 0
+  needSolids: 0
+  isFull: 0
 --- !u!1 &3400281937584895170
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,10 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6530dcae17328a145adf5ad62438f348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSolidFood: 0
-  maxLiquidFood: 0
-  currSolidFood: 0
-  currLiquidFood: 0
+  WAS: {fileID: 0}
 --- !u!135 &6745961065135226408
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -243,5 +244,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 5
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
