@@ -120,7 +120,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 960953455404588642}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.5000001
+  m_Radius: 2
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
@@ -188,8 +188,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4349088281566817446}
-  - component: {fileID: 109808189531559715}
   - component: {fileID: 6745961065135226408}
+  - component: {fileID: 7310025104056335081}
   m_Layer: 0
   m_Name: Mouth
   m_TagString: Untagged
@@ -212,19 +212,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1293421513983843590}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &109808189531559715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3400281937584895170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6530dcae17328a145adf5ad62438f348, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WAS: {fileID: 0}
 --- !u!135 &6745961065135226408
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -246,3 +233,17 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7310025104056335081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400281937584895170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6530dcae17328a145adf5ad62438f348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canEat: 0
+  WAS: {fileID: 0}

@@ -9,15 +9,15 @@ public class Eat : MonoBehaviour
     private AntStats antStats;
 
     [SerializeField]
-    private bool canEat = false;
-    public WorkerBehavior WAS;
+    private bool CanEat;
+    public WorkerBehavior WorkerBehaviour;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        CanEat = true;
         antStats = GetComponentInParent<AntStats>();
-        
     }
 
     // Update is called once per frame
@@ -25,27 +25,17 @@ public class Eat : MonoBehaviour
     {   
         if (antStats.isFull)
         {
-            canEat = true;
-            WAS.IsFull();
+            CanEat = false;
+            WorkerBehaviour.IsFull();
         }
-        else
-        {
-            canEat = false ;
-        }
+        
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Food" && !canEat)
-        { 
-            canEat = false;
-        }
-    }
+  
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Food" && !canEat)
+        if (other.tag == "Food" && CanEat == true)
         {
-            Debug.Log("IN range");
-            canEat = true;
+            CanEat = false;
             Food foodToEat = other.GetComponent<Food>();
             if (antStats.needSolids)
             {
@@ -56,11 +46,17 @@ public class Eat : MonoBehaviour
                 Drink(foodToEat);
             }
         }
+
+        if(other.name == "AntHill")
+        {
+            CanEat = true;
+        }
     }
     //These functions updates the current amount of the type of foods they have
     #region Eating/Drinking 
     private void Drink(Food other)
     {
+        Debug.Log("CHECK");
         other.LoseLiquid();
         antStats.Drink(1);
         Invoke("ResetEat", 2);
@@ -74,7 +70,7 @@ public class Eat : MonoBehaviour
 
     private void ResetEat()
     {
-        canEat = false;
+        CanEat = true;
     }
     #endregion 
 

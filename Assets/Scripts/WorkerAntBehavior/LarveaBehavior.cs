@@ -22,7 +22,7 @@ public class LarveaBehavior : MonoBehaviour
         WorkerBehavior worker = gameObject.AddComponent<WorkerBehavior>();
         worker.antHill = myAnHill;
         Eat eat = GetComponentInChildren<Eat>();
-        eat.WAS = worker;
+        eat.WorkerBehaviour = worker;
         Destroy(GetComponent<LarveaBehavior>());
     }
 }
