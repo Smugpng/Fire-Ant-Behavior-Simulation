@@ -10,7 +10,10 @@ public class AntStats : MonoBehaviour //This script stores and updates the basic
     private float currSolids, currLiquid;
 
     public bool needSolids, isFull;
-    
+
+
+    public delegate void OnStachFood(float food, float liquid);
+    public static event OnStachFood onStachFood;
     // Update is called once per frame
     void Update()
     {
@@ -56,10 +59,9 @@ public class AntStats : MonoBehaviour //This script stores and updates the basic
     {
         currSolids += eatAmt;
     }
-    public void ResetFood(AntHill hill)
+    public void ResetFood()
     {
-        hill.storedFood += currSolids;
-        hill.storedLiquid += currLiquid/2;
+        onStachFood?.Invoke(currSolids, currLiquid);
         currSolids = 0;
         currLiquid = 0;
     }

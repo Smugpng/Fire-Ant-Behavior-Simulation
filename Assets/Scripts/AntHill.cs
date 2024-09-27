@@ -15,9 +15,12 @@ public class AntHill : MonoBehaviour
     [SerializeField]
     [Header("Number 1-10")]
     private int spawnChance = 1;
-    
 
 
+    private void OnEnable()
+    {
+        AntStats.onStachFood += GainFood;
+    }
     // Start is called before the first frame update
     void Start() //Spawns a Queen ant at the start of the hill
     {
@@ -66,7 +69,7 @@ public class AntHill : MonoBehaviour
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = true;
             AntStats AS = other.GetComponent<AntStats>();
-            AS.ResetFood(this);
+            AS.ResetFood();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -76,5 +79,11 @@ public class AntHill : MonoBehaviour
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = false;
         }
+    }
+
+    private void GainFood(float food, float liquid)
+    {
+        storedFood += food;
+        storedLiquid += liquid;
     }
 }
