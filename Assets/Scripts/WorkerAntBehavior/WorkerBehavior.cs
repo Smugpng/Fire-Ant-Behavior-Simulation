@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class WorkerBehavior : MonoBehaviour
 {
+    public delegate void OnFindFood(GameObject food);
+    public static event OnFindFood onFindFood;
 
     [Header("Ants")]
     public Transform antHill;
@@ -33,6 +35,7 @@ public class WorkerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        WorkerBehavior.onFindFood += FoundFood;
         antLayer = 1<<7;
         foodLayer = 1<<6;
         antAgent = GetComponent<NavMeshAgent>();
@@ -49,6 +52,7 @@ public class WorkerBehavior : MonoBehaviour
         if (inBase && isFull)
         {
             isFull = false;
+            WorkerBehavior.onFindFood += FoundFood;
             Search();
         }
     }
@@ -64,7 +68,8 @@ public class WorkerBehavior : MonoBehaviour
                 point = hit.point;
                 antAgent.SetDestination(point);
                 foundFood = true;
-                TellOthers(point, foodToEat);
+                onFindFood?.Invoke(foodToEat);
+                FoundFood(foodToEat);
             }
             else if (RandomSearch(antHill.position, range, out point) && !foundFood) //Else they look for another random spot
             {
@@ -86,24 +91,13 @@ public class WorkerBehavior : MonoBehaviour
         return false;
     }
 
-    private void TellOthers(Vector3 point,GameObject food) //If the ant finds food they tell all the other ants around them so they can all eat it
-    {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position,range,transform.forward,maxRange,antLayer);
-        if(hits.Length > 0)
-        {
-            foreach (RaycastHit hit in hits)
-            {
-                WorkerBehavior foundAnts = hit.collider.gameObject.GetComponent<WorkerBehavior>();
-                foundAnts.FoundFood(point);
-                foundAnts.foodToEat = food;
-            }
-        }
-    }
-    public void FoundFood(Vector3 location) //Updated bool to make sure they dont keep searching while the find food
+    public void FoundFood(GameObject food) //Updated bool to make sure they dont keep searching while the find food
     {
         if (!foundFood && !isFull)
         {
-            antAgent.SetDestination(location);
+            WorkerBehavior.onFindFood -= FoundFood;
+            foodToEat = food;
+            antAgent.SetDestination(food.transform.position);
             foundFood = true;
         }
         
