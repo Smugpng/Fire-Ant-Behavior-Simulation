@@ -51,8 +51,13 @@ public class AntHill : MonoBehaviour
             if( spawnChance >= rng)
             {
                 Spawn();
+                IncreaseHillSize();
             }
         }
+    }
+    private void IncreaseHillSize()
+    {
+        this.transform.localScale += this.transform.localScale  * .01f;
     }
     private void Spawn() //If Spawned it gives the ant the Larvea Stage and adds it to a list of spawned ants
     {
@@ -66,7 +71,6 @@ public class AntHill : MonoBehaviour
     {
         if(other.gameObject.GetComponent<WorkerBehavior>() != null && other.GetComponent<AntStats>()!= null)
         {
-            Debug.Log("IN HILL");
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = true;
             AntStats AS = other.GetComponent<AntStats>();
@@ -79,7 +83,6 @@ public class AntHill : MonoBehaviour
        
         if (other.gameObject.GetComponent<LarveaBehavior>() != null && storedLiquid >= 0)
         {
-            Debug.Log("Step 1");
             LarveaBehavior LB = other.GetComponent<LarveaBehavior>();
             LB.Eat();
         }
@@ -101,7 +104,6 @@ public class AntHill : MonoBehaviour
     }
     private void LarvaeBite()
     {
-        Debug.Log("Step 4");
         storedFood--;
     }
 }

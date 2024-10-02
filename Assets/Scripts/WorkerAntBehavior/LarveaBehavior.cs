@@ -36,7 +36,6 @@ public class LarveaBehavior : MonoBehaviour
 
     public void Eat()
     {
-        Debug.Log("Step 2");
         if (canEat)
         {
             canEat = false;
