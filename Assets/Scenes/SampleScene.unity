@@ -845,8 +845,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 960953455404588642, guid: fa124361f93101c4c95b5825c25a1b24, type: 3}
     - target: {fileID: 3099259517108312478, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+      propertyPath: storedFood
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099259517108312478, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
       propertyPath: spawnChance
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099259517108312478, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
+      propertyPath: storedLiquid
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7062020151037846987, guid: 8a3805e5d0568ff489f00fd83dc6c069, type: 3}
       propertyPath: m_Enabled

@@ -20,6 +20,7 @@ public class AntHill : MonoBehaviour
     private void OnEnable()
     {
         AntStats.onStachFood += GainFood;
+        LarveaBehavior.onEat += LarvaeBite;
     }
     // Start is called before the first frame update
     void Start() //Spawns a Queen ant at the start of the hill
@@ -71,6 +72,17 @@ public class AntHill : MonoBehaviour
             AntStats AS = other.GetComponent<AntStats>();
             AS.ResetFood();
         }
+        
+    }
+    private void OnTriggerStay(Collider other)
+    {
+       
+        if (other.gameObject.GetComponent<LarveaBehavior>() != null && storedLiquid >= 0)
+        {
+            Debug.Log("Step 1");
+            LarveaBehavior LB = other.GetComponent<LarveaBehavior>();
+            LB.Eat();
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -79,11 +91,17 @@ public class AntHill : MonoBehaviour
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = false;
         }
+        
     }
 
     private void GainFood(float food, float liquid)
     {
         storedFood += food;
         storedLiquid += liquid;
+    }
+    private void LarvaeBite()
+    {
+        Debug.Log("Step 4");
+        storedFood--;
     }
 }

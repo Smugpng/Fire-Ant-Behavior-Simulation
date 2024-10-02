@@ -45,6 +45,8 @@ public class AntStats : MonoBehaviour //This script stores and updates the basic
         hp = hpSet;
         solidNeeds = solidSet;
         liquidNeeds = liquidSet;
+        currSolids = 0;
+        currLiquid = 0;
     }
 
     public void LoseHealth(float hpLost)

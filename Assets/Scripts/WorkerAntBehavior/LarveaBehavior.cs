@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LarveaBehavior : MonoBehaviour
 {
+    public delegate void OnEat();
+    public static event OnEat onEat;
+
     public Transform myAnHill;
     private AntStats stats;
+    private bool canEat = true;
+    
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("GrowUp", 3);
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = myAnHill.position;
+        Invoke("GrowUp", 60);
         stats = GetComponent<AntStats>();
-        stats.SetValues(5, 10, 0);
+        stats.SetValues(5, 5, 1);
     }
 
     void GrowUp() //Just adds the worker behavior and sets some variables
@@ -25,4 +33,23 @@ public class LarveaBehavior : MonoBehaviour
         eat.WorkerBehaviour = worker;
         Destroy(GetComponent<LarveaBehavior>());
     }
+
+    public void Eat()
+    {
+        Debug.Log("Step 2");
+        if (canEat)
+        {
+            canEat = false;
+            onEat?.Invoke();
+            stats.Eat(1);
+            Invoke("ResetBite", 2);
+            
+        }
+        if (stats.isFull) GrowUp(); 
+    }
+    private void ResetBite()
+    {
+        canEat = true;
+    }
+
 }

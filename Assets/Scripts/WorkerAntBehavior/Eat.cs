@@ -56,13 +56,14 @@ public class Eat : MonoBehaviour
     #region Eating/Drinking 
     private void Drink(Food other)
     {
-        Debug.Log("CHECK");
+        
         other.LoseLiquid();
         antStats.Drink(1);
         Invoke("ResetEat", 2);
     }
     private void Bite(Food other)
     {
+        Debug.Log("Step 3");
         other.LoseSolid();
         antStats.Eat(1);
         Invoke("ResetEat", 2);
