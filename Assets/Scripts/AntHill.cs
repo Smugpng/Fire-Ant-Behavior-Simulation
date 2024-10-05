@@ -8,59 +8,39 @@ public class AntHill : MonoBehaviour
     public List<GameObject> antsSpawned = new List<GameObject>();
     [SerializeField]
     private GameObject ant, queen;
-    private float timer = 0f;
-    private int seconds = 0;
     public float storedFood, storedLiquid;
 
-    [SerializeField]
-    [Header("Number 1-10")]
-    private int spawnChance = 1;
 
 
     private void OnEnable()
     {
         AntStats.onStachFood += GainFood;
         LarveaBehavior.onEat += LarvaeBite;
+        QueenBehavior.onDrink += QueenDrink;
+        QueenBehavior.onSpawn += Spawn;
     }
     // Start is called before the first frame update
     void Start() //Spawns a Queen ant at the start of the hill
     {
-        GameObject queenAnt = Instantiate(queen);
-        antsSpawned.Add(queenAnt);
+        SpawnQueen();
+        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        Timer();
-        SpawnCheck();
-    }
-
-    private void Timer()
-    {
-        timer += Time.deltaTime;
-        seconds = (int)timer;
-
-    }
-    private void SpawnCheck() //After Every 3 Seconds there is a random chance to spawn a ant based of the spawnChance Int
-    {
-        if (seconds >= 3 )
-        {
-            timer = 0f;
-            int rng = Random.Range(1, 10);
-            if( spawnChance >= rng)
-            {
-                Spawn();
-                IncreaseHillSize();
-            }
-        }
-    }
     private void IncreaseHillSize()
     {
         this.transform.localScale += this.transform.localScale  * .01f;
     }
+    private void SpawnQueen()
+    {
+        GameObject queenAnt = Instantiate(queen);
+        antsSpawned.Add(queenAnt);
+        QueenBehavior QB = queenAnt.AddComponent<QueenBehavior>();
+        QB.myAntHill = this.transform;
+        Invoke("Spawn", 1);
+    }
     private void Spawn() //If Spawned it gives the ant the Larvea Stage and adds it to a list of spawned ants
     {
+        IncreaseHillSize();
         GameObject larvea = Instantiate(ant);
         LarveaBehavior LB = larvea.AddComponent<LarveaBehavior>();
         LB.myAnHill = this.transform;
@@ -81,10 +61,15 @@ public class AntHill : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
        
-        if (other.gameObject.GetComponent<LarveaBehavior>() != null && storedLiquid >= 0)
+        if (other.gameObject.GetComponent<LarveaBehavior>() != null && storedFood >= 0)
         {
             LarveaBehavior LB = other.GetComponent<LarveaBehavior>();
             LB.Eat();
+        }
+        if (other.gameObject.GetComponent<QueenBehavior>() != null && storedLiquid >= 0) 
+        {
+            QueenBehavior QB = other.GetComponent<QueenBehavior>();
+            QB.Drink();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -105,5 +90,9 @@ public class AntHill : MonoBehaviour
     private void LarvaeBite()
     {
         storedFood--;
+    }
+    private void QueenDrink()
+    {
+        storedLiquid--;
     }
 }
