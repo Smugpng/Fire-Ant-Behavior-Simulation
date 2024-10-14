@@ -120,7 +120,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 960953455404588642}
   m_Enabled: 1
   m_AgentTypeID: -1372625422
-  m_Radius: 0.5000001
+  m_Radius: 2.66
   m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
@@ -183,6 +183,8 @@ MonoBehaviour:
     m_Bits: 64
   foundFood: 0
   foodToEat: {fileID: 0}
+  inBase: 0
+  isFull: 0
 --- !u!1 &3400281937584895170
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,10 +230,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6530dcae17328a145adf5ad62438f348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSolidFood: 0
-  maxLiquidFood: 0
-  currSolidFood: 0
-  currLiquidFood: 0
+  CanEat: 0
+  WorkerBehaviour: {fileID: 0}
 --- !u!135 &6745961065135226408
 SphereCollider:
   m_ObjectHideFlags: 0
