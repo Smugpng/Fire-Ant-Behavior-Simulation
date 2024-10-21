@@ -11,6 +11,7 @@ public class Eat : MonoBehaviour
     [SerializeField]
     private bool CanEat;
     public WorkerBehavior WorkerBehaviour;
+    public GameObject foodVisuals;
 
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class Eat : MonoBehaviour
         {
             CanEat = false;
             WorkerBehaviour.IsFull();
+            foodVisuals.SetActive(true);
         }
         
     }
@@ -50,6 +52,7 @@ public class Eat : MonoBehaviour
         if(other.name == "AntHill")
         {
             CanEat = true;
+            foodVisuals.SetActive(false);
         }
     }
     //These functions updates the current amount of the type of foods they have
