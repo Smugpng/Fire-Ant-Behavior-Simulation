@@ -18,7 +18,7 @@ public class WorkerBehavior : MonoBehaviour
 
     [Header("Smell")]
     [SerializeField]
-    private float range = 20;
+    private float range = 1;
     [SerializeField]
     private float maxRange = 50;
     

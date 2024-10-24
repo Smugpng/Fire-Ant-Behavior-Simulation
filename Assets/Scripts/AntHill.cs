@@ -23,7 +23,6 @@ public class AntHill : MonoBehaviour
     void Start() //Spawns a Queen ant at the start of the hill
     {
         SpawnQueen();
-        
     }
 
     private void IncreaseHillSize()
@@ -32,7 +31,7 @@ public class AntHill : MonoBehaviour
     }
     private void SpawnQueen()
     {
-        GameObject queenAnt = Instantiate(queen);
+        GameObject queenAnt = Instantiate(queen, this.transform.position, this.transform.rotation);
         antsSpawned.Add(queenAnt);
         QueenBehavior QB = queenAnt.AddComponent<QueenBehavior>();
         QB.myAntHill = this.transform;
@@ -41,7 +40,7 @@ public class AntHill : MonoBehaviour
     private void Spawn() //If Spawned it gives the ant the Larvea Stage and adds it to a list of spawned ants
     {
         IncreaseHillSize();
-        GameObject larvea = Instantiate(ant);
+        GameObject larvea = Instantiate(ant, this.transform.position, this.transform.rotation);
         LarveaBehavior LB = larvea.AddComponent<LarveaBehavior>();
         LB.myAnHill = this.transform;
         antsSpawned.Add(larvea);

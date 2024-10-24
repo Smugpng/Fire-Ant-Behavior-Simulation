@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5173288963906146471}
   - component: {fileID: 7062020151037846987}
   - component: {fileID: 3099259517108312478}
+  - component: {fileID: 3085765974712569956}
   m_Layer: 0
   m_Name: AntHill
   m_TagString: Untagged
@@ -100,7 +101,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -119,6 +120,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   antsSpawned: []
-  ant: {fileID: 960953455404588642, guid: 76f4e0f31d2284e43bd02cb18d92460e, type: 3}
+  ant: {fileID: 960953455404588642, guid: fa124361f93101c4c95b5825c25a1b24, type: 3}
   queen: {fileID: 7391893032778093085, guid: 3b1e4ce7d6c7c73438522274d8875998, type: 3}
-  spawnChance: 1
+  storedFood: 5
+  storedLiquid: 5
+--- !u!114 &3085765974712569956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048110420170714162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

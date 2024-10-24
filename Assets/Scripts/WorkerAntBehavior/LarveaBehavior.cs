@@ -8,6 +8,7 @@ public class LarveaBehavior : MonoBehaviour
 {
     public delegate void OnEat();
     public static event OnEat onEat;
+    NavMeshAgent agent;
 
     public Transform myAnHill;
     private AntStats stats;
@@ -16,13 +17,16 @@ public class LarveaBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = myAnHill.position;
+        agent = GetComponent<NavMeshAgent>();
+        
         Invoke("GrowUp", 60);
         stats = GetComponent<AntStats>();
         stats.SetValues(5, 5, 1);
     }
-
+    private void FixedUpdate()
+    {
+        agent.destination = myAnHill.position;
+    }
     void GrowUp() //Just adds the worker behavior and sets some variables
     {
         stats.SetValues(10, Random.Range(1,5), Random.Range(5,10));
