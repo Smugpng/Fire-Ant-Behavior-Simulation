@@ -22,12 +22,12 @@ public class AntHill : MonoBehaviour
     // Start is called before the first frame update
     void Start() //Spawns a Queen ant at the start of the hill
     {
-        SpawnQueen();
+        Invoke("SpawnQueen", 3);
     }
 
     private void IncreaseHillSize()
     {
-        this.transform.localScale += this.transform.localScale  * .01f;
+        this.transform.localScale += this.transform.localScale  * .001f;
     }
     private void SpawnQueen()
     {
@@ -53,6 +53,7 @@ public class AntHill : MonoBehaviour
             WorkerBehavior WB = other.GetComponent<WorkerBehavior>();
             WB.inBase = true;
             AntStats AS = other.GetComponent<AntStats>();
+            Debug.Log(AS);
             AS.ResetFood();
         }
         

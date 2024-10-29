@@ -44,7 +44,7 @@ public class WorkerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update() //Updates bools
     {
-        Search();
+        Search(); //Random Point Check
         if(foodToEat == null && foundFood)
         {
             foundFood = false;
@@ -56,6 +56,7 @@ public class WorkerBehavior : MonoBehaviour
             Search();
         }
     }
+   
     private void Search()
     {
         if (antAgent.remainingDistance <= antAgent.stoppingDistance && !foundFood && !isFull) //If the ant is close enough to their stopping point they try looking again
@@ -71,7 +72,7 @@ public class WorkerBehavior : MonoBehaviour
                 onFindFood?.Invoke(foodToEat);
                 FoundFood(foodToEat);
             }
-            else if (RandomSearch(antHill.position, range, out point) && !foundFood) //Else they look for another random spot
+            else if(RandomSearch(antHill.position, range, out point) && !foundFood) //Else they look for another random spot
             {
                 antAgent.SetDestination(point);
             }

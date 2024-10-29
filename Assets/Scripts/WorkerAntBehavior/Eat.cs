@@ -32,9 +32,17 @@ public class Eat : MonoBehaviour
         }
         
     }
-  
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Food")
+        {
+            CanEat = true;
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.tag == "Food" && CanEat == true)
         {
             CanEat = false;
