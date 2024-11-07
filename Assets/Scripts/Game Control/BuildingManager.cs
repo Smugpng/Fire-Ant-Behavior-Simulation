@@ -21,7 +21,6 @@ public class BuildingManager : MonoBehaviour
             pendingObj.transform.position = pos;
             if(Input.GetMouseButtonDown(0))
             {
-                Debug.Log("What the fuck");
                 PlaceObject();
             }
         }
