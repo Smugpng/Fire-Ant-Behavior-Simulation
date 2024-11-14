@@ -30,6 +30,13 @@ public class Eat : MonoBehaviour
             WorkerBehaviour.IsFull();
             foodVisuals.SetActive(true);
         }
+        else
+        {
+
+        }
+        {
+            foodVisuals.SetActive(false);
+        }
         
     }
 

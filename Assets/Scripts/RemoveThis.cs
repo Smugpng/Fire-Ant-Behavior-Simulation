@@ -7,11 +7,11 @@ public class RemoveThis : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("Destroy", 10);
+        Invoke("DestrtoyThis", 10);
     }
 
-    public void Destrtoy()
+    public void DestrtoyThis()
     {
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }

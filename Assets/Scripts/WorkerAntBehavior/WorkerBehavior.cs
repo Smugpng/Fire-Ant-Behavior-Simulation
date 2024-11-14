@@ -53,6 +53,7 @@ public class WorkerBehavior : MonoBehaviour
         if (inBase && isFull)
         {
             isFull = false;
+            foundFood = false;
             WorkerBehavior.onFindFood += FoundFood;
             Search();
         }
@@ -77,6 +78,12 @@ public class WorkerBehavior : MonoBehaviour
             {
                 antAgent.SetDestination(point);
             }
+        }
+        else if(antAgent.remainingDistance <= antAgent.stoppingDistance && isFull)
+        {
+            isFull = false;
+            WorkerBehavior.onFindFood += FoundFood;
+            Search();
         }
     }
 
