@@ -19,7 +19,7 @@ public class LarveaBehavior : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         
-        Invoke("GrowUp", 60);
+        Invoke("GrowUp", 15);
         stats = GetComponent<AntStats>();
         stats.SetValues(5, 5, 1);
     }

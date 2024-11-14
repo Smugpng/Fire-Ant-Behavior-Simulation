@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class BuildingManager : MonoBehaviour
 {
@@ -19,10 +20,15 @@ public class BuildingManager : MonoBehaviour
         if(pendingObj != null)
         {
             pendingObj.transform.position = pos;
-            if(Input.GetMouseButtonDown(0))
+            if(Input.GetKey(KeyCode.Mouse0))
             {
                 PlaceObject();
             }
+        }
+        if (Input.GetKey(KeyCode.R))
+        {
+
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
     public void PlaceObject()

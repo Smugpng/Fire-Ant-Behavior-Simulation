@@ -47,6 +47,7 @@ public class WorkerBehavior : MonoBehaviour
         Search(); //Random Point Check
         if(foodToEat == null && foundFood)
         {
+            Debug.LogWarning("LOST FOOD");
             foundFood = false;
         }
         if (inBase && isFull)
