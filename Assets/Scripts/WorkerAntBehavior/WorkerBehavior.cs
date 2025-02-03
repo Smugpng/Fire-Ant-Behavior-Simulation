@@ -107,4 +107,10 @@ public class WorkerBehavior : MonoBehaviour
         isFull = true;
         antAgent.SetDestination(antHill.position);
     }
+
+    public void GetLocation(Vector3 gulp)
+    {
+        antAgent.SetDestination(gulp);
+        Debug.LogWarning("WHA TGE FUCK");
+    }
 }
